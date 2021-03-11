@@ -3,3 +3,6 @@
 
 # pyenv
 .python-version
+
+# Python
+__pycache__
