@@ -1,5 +1,6 @@
 from hashlib import sha1
 from itertools import combinations
+from lab.lab03 import jaccard
 from random import getrandbits
 from struct import calcsize
 from typing import Dict, List, Set, Tuple
@@ -16,7 +17,7 @@ def task31(n: int) -> Tuple[str, str]:
     )
 
 
-def task32(k: int = 100) -> Dict[Tuple[str, str], float]:
+def task32(k: int = 1000) -> Dict[Tuple[str, str], float]:
     texts = (text1, text2, text3)
     sets = (set(w for w in t if len(w) < 8) for t in texts)
 
@@ -40,5 +41,13 @@ def task32(k: int = 100) -> Dict[Tuple[str, str], float]:
     }
 
 
-def task33():
-    pass
+def task33() -> Dict[Tuple[str, str], float]:
+    texts = (text1, text2, text3)
+    sets = (set(w for w in t if len(w) < 8) for t in texts)
+    return {
+        (a.name, b.name): jaccard(sa, sb)
+        for (a, b), (sa, sb) in zip(
+            combinations(texts, 2),
+            combinations(sets, 2),
+        )
+    }
